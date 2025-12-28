@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play clicker games with multiple levels, rewards, and animations.">
+    <meta name="keywords" content="clicker game, incremental game, idle game, click game">
+    <meta property="og:title" content="Play Clicker Game">
+    <meta property="og:description" content="Engage in an addictive clicker gameplay experience.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#F5F1E8">
+    <title>Clicker Game - ClickerFun</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Schema markup for SoftwareApplication and VideoGame -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "ClickerFun Game",
+        "description": "An engaging clicker game with multiple levels and progression",
+        "applicationCategory": "GameApplication",
+        "url": "https://clickerfun.github.io/game.html",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "ClickerFun Game",
+        "description": "An engaging clicker game with multiple levels and progression",
+        "genre": "Clicker Game",
+        "gameLocation": "https://clickerfun.github.io/game.html"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Main Game Section -->
+    <div class="game-container">
+        <!-- Sidebar -->
+        <aside class="game-sidebar" id="game-sidebar">
+            <h3 class="sidebar-title">GAME INFO</h3>
+            <div class="sidebar-stat">
+                <div class="stat-label">Level</div>
+                <div class="stat-value" id="level-display">1</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="score-display">0</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Multiplier</div>
+                <div class="stat-value" id="multiplier-display">1x</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Clicks</div>
+                <div class="stat-value" id="clicks-display">0</div>
+            </div>
+
+            <h3 class="sidebar-title">LEVEL PROGRESS</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text" id="progress-text">0/100</div>
+
+            <h3 class="sidebar-title">UPGRADES</h3>
+            <div class="upgrades-list" id="upgrades-list"></div>
+
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </aside>
+
+        <!-- Game Area -->
+        <main class="game-area">
+            <div class="game-header">
+                <h1 id="game-title">Clicker Game</h1>
+                <p class="game-tagline">Click to earn. Upgrade to dominate.</p>
+            </div>
+
+            <!-- Clickable Element -->
+            <div class="game-content">
+                <div class="clicker-display" id="clicker-display">
+                    <div class="clicker-button" id="clicker-button">
+                        <span id="clicker-text">CLICK ME</span>
+                    </div>
+                </div>
+
+                <!-- Score Popup Container -->
+                <div id="popup-container"></div>
+
+                <!-- Game Description -->
+                <div class="game-description-box">
+                    <h2>About This Game</h2>
+                    <p id="game-description">Click the button to earn points. Each click earns you currency. Upgrade your multiplier to increase earnings. Progress through 5 levels to master the game!</p>
+                </div>
+
+                <!-- Achievements Section -->
+                <div class="achievements-section">
+                    <h2>Achievements</h2>
+                    <div class="achievements-grid" id="achievements-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for Level Complete -->
+    <div id="level-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Level Complete!</h2>
+            <p id="modal-message">Great job! You've reached the next level.</p>
+            <button class="modal-button" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <script src="script.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>

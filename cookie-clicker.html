@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Cookie Clicker - Click cookies to build a delicious empire. Multiple levels and upgrades await!">
+    <meta name="keywords" content="cookie clicker game, clicker game, idle game, incremental game">
+    <meta property="og:title" content="Cookie Clicker - ClickerFun">
+    <meta property="og:description" content="The classic cookie clicking game with 5 levels, upgrades, and achievements.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#F5F1E8">
+    <title>Cookie Clicker - ClickerFun</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Cookie Clicker",
+        "description": "Click cookies and build a delicious empire in this addictive clicker game",
+        "applicationCategory": "GameApplication",
+        "url": "https://clickerfun.github.io/cookie-clicker.html",
+        "operatingSystem": "Web",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Cookie Clicker",
+        "description": "Click cookies to earn points, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker Game",
+        "gameLocation": "https://clickerfun.github.io/cookie-clicker.html",
+        "image": "https://clickerfun.github.io/favicon.jpg"
+    }
+    </script>
+</head>
+<body>
+    <div id="header-container"></div>
+
+    <div class="game-container">
+        <aside class="game-sidebar" id="game-sidebar">
+            <h3 class="sidebar-title">GAME INFO</h3>
+            <div class="sidebar-stat">
+                <div class="stat-label">Level</div>
+                <div class="stat-value" id="level-display">1</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Score</div>
+                <div class="stat-value" id="score-display">0</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Multiplier</div>
+                <div class="stat-value" id="multiplier-display">1x</div>
+            </div>
+            <div class="sidebar-stat">
+                <div class="stat-label">Clicks</div>
+                <div class="stat-value" id="clicks-display">0</div>
+            </div>
+
+            <h3 class="sidebar-title">LEVEL PROGRESS</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="progress-text" id="progress-text">0/100</div>
+
+            <h3 class="sidebar-title">UPGRADES</h3>
+            <div class="upgrades-list" id="upgrades-list"></div>
+
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </aside>
+
+        <main class="game-area">
+            <div class="game-header">
+                <h1>🍪 COOKIE CLICKER</h1>
+                <p class="game-tagline">Click cookies to build a delicious empire</p>
+            </div>
+
+            <div class="game-content">
+                <div class="clicker-display" id="clicker-display">
+                    <div class="clicker-button" id="clicker-button">
+                        <span id="clicker-text">🍪</span>
+                    </div>
+                    <div id="popup-container"></div>
+                </div>
+
+                <div class="game-description-box">
+                    <h2>About This Game</h2>
+                    <p>Click the cookie to earn points. Purchase upgrades to increase your multiplier. Progress through 5 levels from Cookie Novice to Cookie Dominator! Each level doubles your power and unlocks new challenges.</p>
+                </div>
+
+                <div class="achievements-section">
+                    <h2>Achievements</h2>
+                    <div class="achievements-grid" id="achievements-grid"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="level-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Level Complete!</h2>
+            <p id="modal-message">Great job! You've reached the next level.</p>
+            <button class="modal-button" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+
+    <div id="sidebar-container"></div>
+    <div id="footer-container"></div>
+
+    <script src="script.js"></script>
+    <script>
+        // Game-specific configuration
+        const GAME_NAME = "Cookie Clicker";
+        const GAME_ID = "cookie-clicker";
+        const GAME_EMOJI = "🍪";
+        const GAME_DESCRIPTION = "Click cookies and build a delicious empire";
+        const SAVE_KEY = "game_" + GAME_ID;
+    </script>
+    <script src="game.js"></script>
+</body>
+</html>
