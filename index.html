@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ClickerFun - Discover and play the best clicker games online. Cookie Clicker, Capybara Clicker, and 30+ more games.">
+    <meta name="keywords" content="clicker games, cookie clicker, capybara clicker, online games, incremental games, idle games">
+    <meta name="author" content="ClickerFun">
+    <meta property="og:title" content="ClickerFun - Top Clicker Games Hub">
+    <meta property="og:description" content="Play the best clicker and incremental games. Hundreds of hours of gameplay awaits.">
+    <meta property="og:image" content="/favicon.jpg">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#F5F1E8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <title>ClickerFun - Best Clicker Games Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon.jpg">
+    <link rel="apple-touch-icon" href="/favicon.jpg">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ClickerFun",
+        "description": "A comprehensive platform for discovering and playing clicker and incremental games",
+        "url": "https://clickerfun.github.io",
+        "applicationCategory": "GameApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "ClickerFun",
+        "url": "https://clickerfun.github.io",
+        "logo": "https://clickerfun.github.io/favicon.jpg",
+        "description": "Your destination for the best clicker games"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">CLICKER GAMES</h1>
+            <p class="hero-subtitle">Click. Earn. Dominate.</p>
+            <button class="cta-button" onclick="document.getElementById('featured').scrollIntoView({behavior: 'smooth'})">Explore Games</button>
+        </div>
+        <div class="hero-decorative">
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+            <div class="shape shape-3"></div>
+        </div>
+    </section>
+
+    <!-- Featured Games Section -->
+    <section id="featured" class="featured">
+        <h2 class="section-title">Featured Clicker Games</h2>
+        <div class="games-grid">
+            <div class="game-card game-card-blue">
+                <div class="game-card-header">COOKIE CLICKER</div>
+                <div class="game-description">The classic. Click cookies, build an empire.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+            <div class="game-card game-card-green">
+                <div class="game-card-header">CAPYBARA CLICKER</div>
+                <div class="game-description">Click capybaras. So much fun. Very click.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+            <div class="game-card game-card-yellow">
+                <div class="game-card-header">PLANET CLICKER</div>
+                <div class="game-description">Click planets and build a cosmic empire.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+            <div class="game-card game-card-red">
+                <div class="game-card-header">SPACE BAR CLICKER</div>
+                <div class="game-description">Master the space bar. Become the fastest clicker.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+            <div class="game-card game-card-purple">
+                <div class="game-card-header">MONEY CLICKER</div>
+                <div class="game-description">Make it rain. Accumulate digital wealth.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+            <div class="game-card game-card-orange">
+                <div class="game-card-header">CAT CLICKER</div>
+                <div class="game-description">Click cats and unlock cute achievements.</div>
+                <button class="game-button">Play Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-block">
+            <div class="stat-number">30+</div>
+            <div class="stat-label">Games Available</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">1M+</div>
+            <div class="stat-label">Active Players</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">24/7</div>
+            <div class="stat-label">Play Anytime</div>
+        </div>
+        <div class="stat-block">
+            <div class="stat-number">100%</div>
+            <div class="stat-label">Free</div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-grid">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>CHOOSE</h3>
+                <p>Pick from 30+ clicker games</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>CLICK</h3>
+                <p>Start clicking to earn currency</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>UPGRADE</h3>
+                <p>Buy upgrades and automate clicks</p>
+            </div>
+            <div class="step-card">
+                <div class="step-number">04</div>
+                <h3>DOMINATE</h3>
+                <p>Reach the top of leaderboards</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Games Section -->
+    <section class="popular-games">
+        <h2 class="section-title">Popular Games This Week</h2>
+        <div id="popular-games-container" class="popular-games-list"></div>
+    </section>
+
+    <!-- Sidebar Navigation -->
+    <div id="sidebar-container"></div>
+
+    <!-- Footer Component -->
+    <div id="footer-container"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
