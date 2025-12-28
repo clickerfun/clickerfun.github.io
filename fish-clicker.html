@@ -3,23 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Fish Clicker - Click fish to catch sea creatures. Build your aquarium!">
-    <meta name="keywords" content="fish clicker, aquarium game, fishing game, sea game">
-    <meta property="og:title" content="Fish Clicker - ClickerFun">
-    <meta property="og:description" content="Click fish and build your aquarium with 5 levels.">
-    <meta property="og:type" content="website">
+    <meta name="description" content="Fish Clicker - Catch fish in the ocean!">
     <meta name="theme-color" content="#F5F1E8">
     <title>Fish Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
     <script type="application/ld+json">
-    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Fish Clicker", "description": "Click fish and build your aquarium", "applicationCategory": "GameApplication", "url": "https://clickerfun.github.io/fish-clicker.html", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Fish Clicker",
+        "applicationCategory": "GameApplication",
+        "url": "https://clickerfun.github.io/fish-clicker.html",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+    }
     </script>
 </head>
 <body>
     <div id="header-container"></div>
     <div class="game-container">
-        <aside class="game-sidebar" id="game-sidebar">
+        <aside class="game-sidebar">
             <h3 class="sidebar-title">GAME INFO</h3>
             <div class="sidebar-stat"><div class="stat-label">Level</div><div class="stat-value" id="level-display">1</div></div>
             <div class="sidebar-stat"><div class="stat-label">Score</div><div class="stat-value" id="score-display">0</div></div>
@@ -33,18 +37,51 @@
             <button class="reset-button" onclick="resetGame()">Reset Game</button>
         </aside>
         <main class="game-area">
-            <div class="game-header"><h1>🐟 FISH CLICKER</h1><p class="game-tagline">Catch fish and build your aquarium</p></div>
+            <div class="game-header">
+                <h1 id="game-title">Fish Clicker</h1>
+                <p class="game-tagline">Catch fish in the ocean</p>
+            </div>
             <div class="game-content">
-                <div class="clicker-display" id="clicker-display"><div class="clicker-button" id="clicker-button"><span id="clicker-text">🐟</span></div><div id="popup-container"></div></div>
-                <div class="game-description-box"><h2>About This Game</h2><p>Click fish to catch them for your aquarium. Buy upgrades to improve your fishing gear. Progress through 5 levels and become a master fisherman!</p></div>
-                <div class="achievements-section"><h2>Achievements</h2><div class="achievements-grid" id="achievements-grid"></div></div>
+                <div class="clicker-display" id="clicker-display">
+                    <div class="clicker-button" id="clicker-button"><span id="clicker-text">🐠</span></div>
+                    <div id="popup-container"></div>
+                </div>
+                <div class="game-description-box">
+                    <h2>About This Game</h2>
+                    <p>Click fish and build your aquatic empire! Catch rare species and upgrade your ocean habitat!</p>
+                </div>
+                <div class="achievements-section">
+                    <h2>Achievements</h2>
+                    <div class="achievements-grid" id="achievements-grid"></div>
+                </div>
+                <div class="featured-games-section">
+                    <h2>Featured Clicker Games</h2>
+                    <div class="featured-games-grid" id="featured-games"></div>
+                </div>
+                <div class="popular-games-section">
+                    <h2>Popular Games</h2>
+                    <div class="popular-games-grid" id="popular-games"></div>
+                </div>
             </div>
         </main>
     </div>
-    <div id="level-modal" class="modal"><div class="modal-content"><h2 id="modal-title">Level Complete!</h2><p id="modal-message">Great job!</p><button class="modal-button" onclick="closeModal()">Continue</button></div></div>
-    <div id="sidebar-container"></div><div id="footer-container"></div>
+    <div id="level-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="modal-title">Level Complete!</h2>
+            <p id="modal-message">Great job! You've reached the next level.</p>
+            <button class="modal-button" onclick="closeModal()">Continue</button>
+        </div>
+    </div>
+    <div id="sidebar-container"></div>
+    <div id="footer-container"></div>
+    <script>
+        const GAME_NAME = "Fish Clicker";
+        const GAME_ID = "fish-clicker";
+        const GAME_EMOJI = "🐠";
+        const GAME_DESCRIPTION = "Catch fish in the ocean";
+        const SAVE_KEY = "game_" + GAME_ID;
+    </script>
     <script src="script.js"></script>
-    <script>const GAME_NAME = "Fish Clicker"; const GAME_ID = "fish-clicker"; const GAME_EMOJI = "🐟";</script>
     <script src="game.js"></script>
 </body>
 </html>

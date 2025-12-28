@@ -5,36 +5,36 @@
 
 // Game data
 const games = [
-  "Cookie Clicker",
-  "Capybara Clicker",
-  "Planet Clicker",
-  "Space Bar Clicker",
-  "Clicker Counter",
-  "Candy Clicker",
-  "Duck Clicker",
-  "Energy Clicker",
-  "Money Clicker",
-  "Cat Clicker",
-  "Kiwi Clicker",
-  "Baseball Clicker",
-  "Minecraft Clicker",
-  "Clock Clicker",
-  "Button Clicker",
-  "Chicken Clicker",
-  "Clicker Timer",
-  "Coin Clicker",
-  "Dog Clicker",
-  "Plant Clicker",
-  "Finger Clicker",
-  "Computer Clicker",
-  "Website Clicker",
-  "Frog Clicker",
-  "Fish Clicker",
-  "Eye Clicker",
-  "Spider Clicker",
-  "Lion Clicker",
-  "Box Clicker",
-  "Clouds Clicker",
+  { name: "Cookie Clicker", file: "cookie-clicker.html", emoji: "🍪" },
+  { name: "Capybara Clicker", file: "capybara-clicker.html", emoji: "🐹" },
+  { name: "Planet Clicker", file: "planet-clicker.html", emoji: "🌍" },
+  { name: "Space Bar Clicker", file: "space-clicker.html", emoji: "🚀" },
+  { name: "Clicker Counter", file: "counter-clicker.html", emoji: "📊" },
+  { name: "Candy Clicker", file: "candy-clicker.html", emoji: "🍬" },
+  { name: "Duck Clicker", file: "duck-clicker.html", emoji: "🦆" },
+  { name: "Energy Clicker", file: "energy-clicker.html", emoji: "⚡" },
+  { name: "Money Clicker", file: "money-clicker.html", emoji: "💰" },
+  { name: "Cat Clicker", file: "cat-clicker.html", emoji: "🐱" },
+  { name: "Kiwi Clicker", file: "kiwi-clicker.html", emoji: "🥝" },
+  { name: "Baseball Clicker", file: "baseball-clicker.html", emoji: "⚾" },
+  { name: "Minecraft Clicker", file: "minecraft-clicker.html", emoji: "⬜" },
+  { name: "Clock Clicker", file: "clock-clicker.html", emoji: "🕐" },
+  { name: "Button Clicker", file: "button-clicker.html", emoji: "🔘" },
+  { name: "Chicken Clicker", file: "chicken-clicker.html", emoji: "🐔" },
+  { name: "Clicker Timer", file: "timer-clicker.html", emoji: "⏱️" },
+  { name: "Coin Clicker", file: "coin-clicker.html", emoji: "🪙" },
+  { name: "Dog Clicker", file: "dog-clicker.html", emoji: "🐕" },
+  { name: "Plant Clicker", file: "plant-clicker.html", emoji: "🌱" },
+  { name: "Finger Clicker", file: "finger-clicker.html", emoji: "☝️" },
+  { name: "Computer Clicker", file: "computer-clicker.html", emoji: "💻" },
+  { name: "Website Clicker", file: "website-clicker.html", emoji: "🌐" },
+  { name: "Frog Clicker", file: "frog-clicker.html", emoji: "🐸" },
+  { name: "Fish Clicker", file: "fish-clicker.html", emoji: "🐠" },
+  { name: "Eye Clicker", file: "eye-clicker.html", emoji: "👁️" },
+  { name: "Spider Clicker", file: "spider-clicker.html", emoji: "🕷️" },
+  { name: "Lion Clicker", file: "lion-clicker.html", emoji: "🦁" },
+  { name: "Box Clicker", file: "box-clicker.html", emoji: "📦" },
+  { name: "Clouds Clicker", file: "clouds-clicker.html", emoji: "☁️" },
 ]
 
 const colors = [
@@ -94,21 +94,38 @@ function loadSidebar() {
   }
 }
 
-/**
- * Load popular games
- */
-function loadPopularGames() {
-  const container = document.getElementById("popular-games-container")
+function loadFeaturedGames() {
+  const container = document.getElementById("featured-games")
   if (container) {
-    const popularGames = games.slice(0, 6)
+    const featuredGames = games.slice(0, 6)
+    container.innerHTML = featuredGames
+      .map((game, index) => {
+        const color = colors[index % colors.length]
+        return `
+          <a href="${game.file}" class="game-card ${color.class}">
+            <div class="game-emoji">${game.emoji}</div>
+            <div class="game-name">${game.name}</div>
+          </a>
+        `
+      })
+      .join("")
+  }
+}
+
+function loadPopularGames() {
+  const container = document.getElementById("popular-games")
+  if (container) {
+    const popularGames = games.slice(6, 12)
     container.innerHTML = popularGames
-      .map(
-        (game) => `
-            <div class="popular-game-item">
-                <div class="popular-game-name">${game}</div>
-            </div>
-        `,
-      )
+      .map((game, index) => {
+        const color = colors[(index + 6) % colors.length]
+        return `
+          <a href="${game.file}" class="game-card ${color.class}">
+            <div class="game-emoji">${game.emoji}</div>
+            <div class="game-name">${game.name}</div>
+          </a>
+        `
+      })
       .join("")
   }
 }
@@ -123,10 +140,11 @@ function loadAllGames() {
       .map((game, index) => {
         const color = colors[index % colors.length]
         return `
-                <a href="#" class="all-game-card ${color.class}">
-                    <div class="game-name-large">${game}</div>
-                </a>
-            `
+          <a href="${game.file}" class="all-game-card ${color.class}">
+            <div class="game-emoji-large">${game.emoji}</div>
+            <div class="game-name-large">${game.name}</div>
+          </a>
+        `
       })
       .join("")
   }
@@ -263,6 +281,7 @@ function init() {
   loadHeader()
   loadFooter()
   loadSidebar()
+  loadFeaturedGames()
   loadPopularGames()
   loadAllGames()
 

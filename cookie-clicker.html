@@ -79,7 +79,7 @@
 
         <main class="game-area">
             <div class="game-header">
-                <h1>🍪 COOKIE CLICKER</h1>
+                <h1 id="game-title">Cookie Clicker</h1>
                 <p class="game-tagline">Click cookies to build a delicious empire</p>
             </div>
 
@@ -100,6 +100,18 @@
                     <h2>Achievements</h2>
                     <div class="achievements-grid" id="achievements-grid"></div>
                 </div>
+
+                <!-- Featured Games Section -->
+                <div class="featured-games-section">
+                    <h2>Featured Clicker Games</h2>
+                    <div class="featured-games-grid" id="featured-games"></div>
+                </div>
+
+                <!-- Popular Games Section -->
+                <div class="popular-games-section">
+                    <h2>Popular Games</h2>
+                    <div class="popular-games-grid" id="popular-games"></div>
+                </div>
             </div>
         </main>
     </div>
@@ -115,7 +127,6 @@
     <div id="sidebar-container"></div>
     <div id="footer-container"></div>
 
-    <script src="script.js"></script>
     <script>
         // Game-specific configuration
         const GAME_NAME = "Cookie Clicker";
@@ -125,5 +136,6 @@
         const SAVE_KEY = "game_" + GAME_ID;
     </script>
     <script src="game.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
