@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Coin Clicker - Click coins to build your fortune. Earn wealth and unlock upgrades!">
+    <meta name="keywords" content="coin clicker game, money clicker, cash clicker, idle game">
+    <meta property="og:title" content="Coin Clicker - ClickerFun">
+    <meta property="og:description" content="Click coins to build wealth with 5 levels and powerful upgrades.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#F5F1E8">
+    <title>Coin Clicker - ClickerFun</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon.jpg">
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Coin Clicker", "description": "Click coins and build your fortune", "applicationCategory": "GameApplication", "url": "https://clickerfun.github.io/coin-clicker.html", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "VideoGame", "name": "Coin Clicker", "description": "Click coins to earn points, buy upgrades, and progress through 5 levels", "genre": "Clicker Game", "gameLocation": "https://clickerfun.github.io/coin-clicker.html", "image": "https://clickerfun.github.io/favicon.jpg"}
+    </script>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="game-container">
+        <aside class="game-sidebar" id="game-sidebar">
+            <h3 class="sidebar-title">GAME INFO</h3>
+            <div class="sidebar-stat"><div class="stat-label">Level</div><div class="stat-value" id="level-display">1</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Score</div><div class="stat-value" id="score-display">0</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Multiplier</div><div class="stat-value" id="multiplier-display">1x</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Clicks</div><div class="stat-value" id="clicks-display">0</div></div>
+            <h3 class="sidebar-title">LEVEL PROGRESS</h3>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-text" id="progress-text">0/100</div>
+            <h3 class="sidebar-title">UPGRADES</h3>
+            <div class="upgrades-list" id="upgrades-list"></div>
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </aside>
+        <main class="game-area">
+            <div class="game-header"><h1>💰 COIN CLICKER</h1><p class="game-tagline">Build your fortune, one click at a time</p></div>
+            <div class="game-content">
+                <div class="clicker-display" id="clicker-display"><div class="clicker-button" id="clicker-button"><span id="clicker-text">💰</span></div><div id="popup-container"></div></div>
+                <div class="game-description-box"><h2>About This Game</h2><p>Click coins to earn wealth. Purchase upgrades to multiply your earnings. Progress through 5 levels and become a financial tycoon!</p></div>
+                <div class="achievements-section"><h2>Achievements</h2><div class="achievements-grid" id="achievements-grid"></div></div>
+            </div>
+        </main>
+    </div>
+    <div id="level-modal" class="modal"><div class="modal-content"><h2 id="modal-title">Level Complete!</h2><p id="modal-message">Great job!</p><button class="modal-button" onclick="closeModal()">Continue</button></div></div>
+    <div id="sidebar-container"></div><div id="footer-container"></div>
+    <script src="script.js"></script>
+    <script>const GAME_NAME = "Coin Clicker"; const GAME_ID = "coin-clicker"; const GAME_EMOJI = "💰";</script>
+    <script src="game.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Heart Clicker - Click hearts to spread love. Fill the world with compassion!">
+    <meta name="keywords" content="heart clicker, love game, emotion game, idle game">
+    <meta property="og:title" content="Heart Clicker - ClickerFun">
+    <meta property="og:description" content="Click hearts and spread love with 5 levels.">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#F5F1E8">
+    <title>Heart Clicker - ClickerFun</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="/favicon.jpg">
+    <script type="application/ld+json">
+    {"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "Heart Clicker", "description": "Click hearts and spread love", "applicationCategory": "GameApplication", "url": "https://clickerfun.github.io/heart-clicker.html", "operatingSystem": "Web", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}}
+    </script>
+</head>
+<body>
+    <div id="header-container"></div>
+    <div class="game-container">
+        <aside class="game-sidebar" id="game-sidebar">
+            <h3 class="sidebar-title">GAME INFO</h3>
+            <div class="sidebar-stat"><div class="stat-label">Level</div><div class="stat-value" id="level-display">1</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Score</div><div class="stat-value" id="score-display">0</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Multiplier</div><div class="stat-value" id="multiplier-display">1x</div></div>
+            <div class="sidebar-stat"><div class="stat-label">Clicks</div><div class="stat-value" id="clicks-display">0</div></div>
+            <h3 class="sidebar-title">LEVEL PROGRESS</h3>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+            <div class="progress-text" id="progress-text">0/100</div>
+            <h3 class="sidebar-title">UPGRADES</h3>
+            <div class="upgrades-list" id="upgrades-list"></div>
+            <button class="reset-button" onclick="resetGame()">Reset Game</button>
+        </aside>
+        <main class="game-area">
+            <div class="game-header"><h1>❤️ HEART CLICKER</h1><p class="game-tagline">Spread love and compassion</p></div>
+            <div class="game-content">
+                <div class="clicker-display" id="clicker-display"><div class="clicker-button" id="clicker-button"><span id="clicker-text">❤️</span></div><div id="popup-container"></div></div>
+                <div class="game-description-box"><h2>About This Game</h2><p>Click hearts to spread love and compassion. Unlock upgrades that multiply your kindness. Progress through 5 levels of emotional growth!</p></div>
+                <div class="achievements-section"><h2>Achievements</h2><div class="achievements-grid" id="achievements-grid"></div></div>
+            </div>
+        </main>
+    </div>
+    <div id="level-modal" class="modal"><div class="modal-content"><h2 id="modal-title">Level Complete!</h2><p id="modal-message">Great job!</p><button class="modal-button" onclick="closeModal()">Continue</button></div></div>
+    <div id="sidebar-container"></div><div id="footer-container"></div>
+    <script src="script.js"></script>
+    <script>const GAME_NAME = "Heart Clicker"; const GAME_ID = "heart-clicker"; const GAME_EMOJI = "❤️";</script>
+    <script src="game.js"></script>
+</body>
+</html>

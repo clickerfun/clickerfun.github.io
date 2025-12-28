@@ -20,7 +20,7 @@ const levels = [
     threshold: 100,
     multiplier: 1,
     reward: 10,
-    title: "Clicker Novice",
+    title: "Novice",
     color: "blue",
   },
   {
@@ -28,7 +28,7 @@ const levels = [
     threshold: 250,
     multiplier: 2,
     reward: 25,
-    title: "Clicker Adept",
+    title: "Adept",
     color: "green",
   },
   {
@@ -36,7 +36,7 @@ const levels = [
     threshold: 500,
     multiplier: 3,
     reward: 50,
-    title: "Clicker Master",
+    title: "Master",
     color: "yellow",
   },
   {
@@ -44,7 +44,7 @@ const levels = [
     threshold: 1000,
     multiplier: 5,
     reward: 100,
-    title: "Clicker Legend",
+    title: "Legend",
     color: "red",
   },
   {
@@ -52,7 +52,7 @@ const levels = [
     threshold: 2000,
     multiplier: 10,
     reward: 250,
-    title: "Clicker Dominator",
+    title: "Dominator",
     color: "purple",
   },
 ]
@@ -75,11 +75,14 @@ const achievements = [
 
 let unlockedAchievements = []
 
-const GAME_NAME = "Clicker Game" // Declare GAME_NAME variable
-const GAME_EMOJI = "🖱️" // Declare GAME_EMOJI variable
+// Default values if not set in HTML
+const GAME_NAME = "Clicker Game"
+const GAME_ID = "clicker-game"
+const GAME_EMOJI = "🖱️"
 
 function loadGameState() {
-  const saved = localStorage.getItem("clickerGameState")
+  const saveKey = "game_" + GAME_ID
+  const saved = localStorage.getItem(saveKey)
   if (saved) {
     const data = JSON.parse(saved)
     Object.assign(gameState, data)
@@ -87,11 +90,14 @@ function loadGameState() {
 }
 
 function saveGameState() {
-  localStorage.setItem("clickerGameState", JSON.stringify(gameState))
+  const saveKey = "game_" + GAME_ID
+  localStorage.setItem(saveKey, JSON.stringify(gameState))
 }
 
 function initUpgrades() {
   const upgradesList = document.getElementById("upgrades-list")
+  if (!upgradesList) return
+
   upgradesList.innerHTML = upgrades
     .map(
       (upgrade) => `
@@ -108,6 +114,8 @@ function initUpgrades() {
 
 function initAchievements() {
   const achievementsGrid = document.getElementById("achievements-grid")
+  if (!achievementsGrid) return
+
   achievementsGrid.innerHTML = achievements
     .map(
       (achievement) => `
@@ -130,21 +138,32 @@ function handleClick() {
   gameState.totalScore += points
   gameState.levelScore += points
 
-  // Update displays
-  document.getElementById("score-display").textContent = gameState.totalScore
-  document.getElementById("clicks-display").textContent = gameState.clicks
-  document.getElementById("multiplier-display").textContent = currentLevel.multiplier + "x"
+  // Update displays with null checks
+  const scoreDisplay = document.getElementById("score-display")
+  const clicksDisplay = document.getElementById("clicks-display")
+  const multiplierDisplay = document.getElementById("multiplier-display")
+
+  if (scoreDisplay) scoreDisplay.textContent = gameState.totalScore
+  if (clicksDisplay) clicksDisplay.textContent = gameState.clicks
+  if (multiplierDisplay) multiplierDisplay.textContent = currentLevel.multiplier + "x"
 
   // Update progress bar
-  const progressPercent = Math.min(100, (gameState.levelScore / currentLevel.threshold) * 100)
-  document.getElementById("progress-fill").style.width = progressPercent + "%"
-  document.getElementById("progress-text").textContent = gameState.levelScore + "/" + currentLevel.threshold
+  const progressFill = document.getElementById("progress-fill")
+  const progressText = document.getElementById("progress-text")
+
+  if (progressFill && progressText) {
+    const progressPercent = Math.min(100, (gameState.levelScore / currentLevel.threshold) * 100)
+    progressFill.style.width = progressPercent + "%"
+    progressText.textContent = gameState.levelScore + "/" + currentLevel.threshold
+  }
 
   // Visual feedback
-  button.style.transform = "scale(0.92)"
-  setTimeout(() => {
-    button.style.transform = "scale(1)"
-  }, 100)
+  if (button) {
+    button.style.transform = "scale(0.92)"
+    setTimeout(() => {
+      if (button) button.style.transform = "scale(1)"
+    }, 100)
+  }
 
   // Show floating number
   createPopup(points)
@@ -166,6 +185,8 @@ function handleClick() {
 
 function createPopup(points) {
   const container = document.getElementById("popup-container")
+  if (!container) return
+
   const popup = document.createElement("div")
   popup.className = "score-popup"
   popup.textContent = "+" + points
@@ -189,12 +210,12 @@ function createPopup(points) {
 
 function getColorValue(colorName) {
   const colors = {
-    blue: "#0066ff",
-    green: "#00cc00",
-    yellow: "#ffcc00",
-    red: "#ff3333",
-    purple: "#9933ff",
-    orange: "#ff6600",
+    blue: "#0052cc",
+    green: "#00a650",
+    yellow: "#ffb81c",
+    red: "#e50000",
+    purple: "#7b2cbf",
+    orange: "#ff6b35",
   }
   return colors[colorName] || "#000000"
 }
@@ -205,18 +226,25 @@ function levelUp() {
   const newLevel = levels[gameState.currentLevel - 1]
 
   // Update UI
-  document.getElementById("level-display").textContent = gameState.currentLevel
-  document.getElementById("multiplier-display").textContent = newLevel.multiplier + "x"
+  const levelDisplay = document.getElementById("level-display")
+  const multiplierDisplay = document.getElementById("multiplier-display")
+
+  if (levelDisplay) levelDisplay.textContent = gameState.currentLevel
+  if (multiplierDisplay) multiplierDisplay.textContent = newLevel.multiplier + "x"
 
   // Show modal
   const modal = document.getElementById("level-modal")
-  document.getElementById("modal-title").textContent = "Level " + gameState.currentLevel + " Unlocked!"
-  document.getElementById("modal-message").textContent = "You've become a " + newLevel.title + "!"
+  if (modal) {
+    const modalTitle = document.getElementById("modal-title")
+    const modalMessage = document.getElementById("modal-message")
 
-  // Apply level color to modal
-  modal.style.borderColor = getColorValue(newLevel.color)
+    if (modalTitle) modalTitle.textContent = "Level " + gameState.currentLevel + " Unlocked!"
+    if (modalMessage) modalMessage.textContent = "You've become a " + newLevel.title + "!"
 
-  modal.classList.add("active")
+    // Apply level color to modal
+    modal.style.borderColor = getColorValue(newLevel.color)
+    modal.classList.add("active")
+  }
 
   // Reward animation
   createRewardAnimation(newLevel.reward)
@@ -229,6 +257,8 @@ function levelUp() {
 
 function createRewardAnimation(amount) {
   const container = document.getElementById("popup-container")
+  if (!container) return
+
   const reward = document.createElement("div")
   reward.className = "reward-popup"
   reward.textContent = "LEVEL UP! +$" + amount
@@ -248,9 +278,14 @@ function createRewardAnimation(amount) {
 function buyUpgrade(upgradeId, cost) {
   if (gameState.totalScore >= cost) {
     gameState.totalScore -= cost
-    gameState.multiplier += upgrades.find((u) => u.id === upgradeId).bonus
-    document.getElementById("score-display").textContent = gameState.totalScore
-    document.getElementById("multiplier-display").textContent = gameState.multiplier + "x"
+    const upgrade = upgrades.find((u) => u.id === upgradeId)
+    gameState.multiplier += upgrade.bonus
+
+    const scoreDisplay = document.getElementById("score-display")
+    const multiplierDisplay = document.getElementById("multiplier-display")
+
+    if (scoreDisplay) scoreDisplay.textContent = gameState.totalScore
+    if (multiplierDisplay) multiplierDisplay.textContent = gameState.multiplier + "x"
 
     createPopup("Upgrade!")
     playUpgradeSound()
@@ -288,12 +323,19 @@ function resetGame() {
     gameState.multiplier = 1
     unlockedAchievements = []
 
-    document.getElementById("level-display").textContent = "1"
-    document.getElementById("score-display").textContent = "0"
-    document.getElementById("multiplier-display").textContent = "1x"
-    document.getElementById("clicks-display").textContent = "0"
-    document.getElementById("progress-fill").style.width = "0%"
-    document.getElementById("progress-text").textContent = "0/100"
+    const levelDisplay = document.getElementById("level-display")
+    const scoreDisplay = document.getElementById("score-display")
+    const multiplierDisplay = document.getElementById("multiplier-display")
+    const clicksDisplay = document.getElementById("clicks-display")
+    const progressFill = document.getElementById("progress-fill")
+    const progressText = document.getElementById("progress-text")
+
+    if (levelDisplay) levelDisplay.textContent = "1"
+    if (scoreDisplay) scoreDisplay.textContent = "0"
+    if (multiplierDisplay) multiplierDisplay.textContent = "1x"
+    if (clicksDisplay) clicksDisplay.textContent = "0"
+    if (progressFill) progressFill.style.width = "0%"
+    if (progressText) progressText.textContent = "0/100"
 
     initAchievements()
     saveGameState()
@@ -301,75 +343,94 @@ function resetGame() {
 }
 
 function closeModal() {
-  document.getElementById("level-modal").classList.remove("active")
+  const modal = document.getElementById("level-modal")
+  if (modal) modal.classList.remove("active")
 }
 
 function playClickSound() {
-  // Create simple beep sound using Web Audio API
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)()
-  const oscillator = audioContext.createOscillator()
-  const gainNode = audioContext.createGain()
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
 
-  oscillator.connect(gainNode)
-  gainNode.connect(audioContext.destination)
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
 
-  oscillator.frequency.value = 800
-  oscillator.type = "sine"
+    oscillator.frequency.value = 800
+    oscillator.type = "sine"
 
-  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
-  gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1)
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1)
 
-  oscillator.start(audioContext.currentTime)
-  oscillator.stop(audioContext.currentTime + 0.1)
+    oscillator.start(audioContext.currentTime)
+    oscillator.stop(audioContext.currentTime + 0.1)
+  } catch (e) {
+    console.log("[v0] Audio context error:", e)
+  }
 }
 
 function playLevelUpSound() {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)()
-  const oscillator = audioContext.createOscillator()
-  const gainNode = audioContext.createGain()
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
 
-  oscillator.connect(gainNode)
-  gainNode.connect(audioContext.destination)
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
 
-  oscillator.frequency.setValueAtTime(600, audioContext.currentTime)
-  oscillator.frequency.exponentialRampToValueAtTime(1000, audioContext.currentTime + 0.3)
-  oscillator.type = "sine"
+    oscillator.frequency.setValueAtTime(600, audioContext.currentTime)
+    oscillator.frequency.exponentialRampToValueAtTime(1000, audioContext.currentTime + 0.3)
+    oscillator.type = "sine"
 
-  gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
-  gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3)
+    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3)
 
-  oscillator.start(audioContext.currentTime)
-  oscillator.stop(audioContext.currentTime + 0.3)
+    oscillator.start(audioContext.currentTime)
+    oscillator.stop(audioContext.currentTime + 0.3)
+  } catch (e) {
+    console.log("[v0] Audio context error:", e)
+  }
 }
 
 function playUpgradeSound() {
-  const audioContext = new (window.AudioContext || window.webkitAudioContext)()
-  const oscillator = audioContext.createOscillator()
-  const gainNode = audioContext.createGain()
+  try {
+    const audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    const oscillator = audioContext.createOscillator()
+    const gainNode = audioContext.createGain()
 
-  oscillator.connect(gainNode)
-  gainNode.connect(audioContext.destination)
+    oscillator.connect(gainNode)
+    gainNode.connect(audioContext.destination)
 
-  oscillator.frequency.value = 1200
-  oscillator.type = "square"
+    oscillator.frequency.value = 1200
+    oscillator.type = "square"
 
-  gainNode.gain.setValueAtTime(0.2, audioContext.currentTime)
-  gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15)
+    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime)
+    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15)
 
-  oscillator.start(audioContext.currentTime)
-  oscillator.stop(audioContext.currentTime + 0.15)
+    oscillator.start(audioContext.currentTime)
+    oscillator.stop(audioContext.currentTime + 0.15)
+  } catch (e) {
+    console.log("[v0] Audio context error:", e)
+  }
 }
 
 function initGame() {
   loadGameState()
-  document.getElementById("clicker-button").addEventListener("click", handleClick)
 
-  // Update game title if global variable exists
-  if (typeof GAME_NAME !== "undefined") {
-    document.getElementById("game-title").textContent = GAME_NAME
+  const clickerButton = document.getElementById("clicker-button")
+  if (clickerButton) {
+    clickerButton.addEventListener("click", handleClick)
   }
-  if (typeof GAME_EMOJI !== "undefined") {
-    document.getElementById("clicker-text").textContent = GAME_EMOJI
+
+  // Update game title and emoji if set in HTML
+  const gameTitle = document.getElementById("game-title")
+  const clickerText = document.getElementById("clicker-text")
+
+  if (gameTitle && typeof GAME_NAME !== "undefined") {
+    gameTitle.textContent = GAME_NAME
+  }
+  if (clickerText && typeof GAME_EMOJI !== "undefined") {
+    clickerText.textContent = GAME_EMOJI
   }
 
   initUpgrades()
@@ -377,14 +438,23 @@ function initGame() {
 
   // Update displays
   const currentLevel = levels[gameState.currentLevel - 1]
-  document.getElementById("level-display").textContent = gameState.currentLevel
-  document.getElementById("score-display").textContent = gameState.totalScore
-  document.getElementById("multiplier-display").textContent = currentLevel.multiplier + "x"
-  document.getElementById("clicks-display").textContent = gameState.clicks
+  const levelDisplay = document.getElementById("level-display")
+  const scoreDisplay = document.getElementById("score-display")
+  const multiplierDisplay = document.getElementById("multiplier-display")
+  const clicksDisplay = document.getElementById("clicks-display")
+  const progressFill = document.getElementById("progress-fill")
+  const progressText = document.getElementById("progress-text")
 
-  const progressPercent = Math.min(100, (gameState.levelScore / currentLevel.threshold) * 100)
-  document.getElementById("progress-fill").style.width = progressPercent + "%"
-  document.getElementById("progress-text").textContent = gameState.levelScore + "/" + currentLevel.threshold
+  if (levelDisplay) levelDisplay.textContent = gameState.currentLevel
+  if (scoreDisplay) scoreDisplay.textContent = gameState.totalScore
+  if (multiplierDisplay) multiplierDisplay.textContent = currentLevel.multiplier + "x"
+  if (clicksDisplay) clicksDisplay.textContent = gameState.clicks
+
+  if (progressFill && progressText) {
+    const progressPercent = Math.min(100, (gameState.levelScore / currentLevel.threshold) * 100)
+    progressFill.style.width = progressPercent + "%"
+    progressText.textContent = gameState.levelScore + "/" + currentLevel.threshold
+  }
 }
 
 // Initialize on page load
