@@ -1,9 +1,21 @@
+/**
+ * @typedef {Object} GameEntry
+ * @property {string} name - The display name of the clicker game
+ * @property {string} file - The HTML file path
+ * @property {string} emoji - The visual icon for the game
+ */
+
+/**
+ * @typedef {Object} ColorTheme
+ * @property {string} name - Color identifier
+ * @property {string} class - CSS class name for styling
+ * @property {string} var - CSS variable name
+ */
+
 // ============================================
 // BRUTALIST CLICKER GAMES WEBSITE SCRIPT
-// Modular component loading and interactions
 // ============================================
 
-// Game data
 const games = [
   { name: "Cookie Clicker", file: "cookie-clicker.html", emoji: "🍪" },
   { name: "Capybara Clicker", file: "capybara-clicker.html", emoji: "🐹" },
@@ -35,7 +47,7 @@ const games = [
   { name: "Lion Clicker", file: "lion-clicker.html", emoji: "🦁" },
   { name: "Box Clicker", file: "box-clicker.html", emoji: "📦" },
   { name: "Clouds Clicker", file: "clouds-clicker.html", emoji: "☁️" },
-]
+];
 
 const colors = [
   { name: "blue", class: "game-card-blue", var: "--color-blue" },
@@ -44,280 +56,127 @@ const colors = [
   { name: "red", class: "game-card-red", var: "--color-red" },
   { name: "purple", class: "game-card-purple", var: "--color-purple" },
   { name: "orange", class: "game-card-orange", var: "--color-orange" },
-]
+];
 
 // ============================================
-// COMPONENT LOADING
+// COMPONENT LOADING (FIXED WITH ASYNC)
 // ============================================
 
-/**
- * Load header component
- */
-function loadHeader() {
-  const headerContainer = document.getElementById("header-container")
-  if (headerContainer) {
-    fetch("header.html")
-      .then((response) => response.text())
-      .then((html) => {
-        headerContainer.innerHTML = html
-        initMenuToggle()
-      })
+async function loadComponent(id, file) {
+  const container = document.getElementById(id);
+  if (!container) return false;
+  try {
+    const response = await fetch(file);
+    const html = await response.text();
+    container.innerHTML = html;
+    return true;
+  } catch (err) {
+    console.error(`Failed to load ${file}:`, err);
+    return false;
   }
 }
 
-/**
- * Load footer component
- */
-function loadFooter() {
-  const footerContainer = document.getElementById("footer-container")
-  if (footerContainer) {
-    fetch("footer.html")
-      .then((response) => response.text())
-      .then((html) => {
-        footerContainer.innerHTML = html
-      })
-  }
-}
+function renderGamesList(containerId, gameSlice, isLarge = false) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
 
-/**
- * Load sidebar component
- */
-function loadSidebar() {
-  const sidebarContainer = document.getElementById("sidebar-container")
-  if (sidebarContainer) {
-    fetch("sidebar.html")
-      .then((response) => response.text())
-      .then((html) => {
-        sidebarContainer.innerHTML = html
-        initSidebarEvents()
-      })
-  }
-}
+  const cardClass = isLarge ? "all-game-card" : "game-card";
+  const emojiClass = isLarge ? "game-emoji-large" : "game-emoji";
+  const nameClass = isLarge ? "game-name-large" : "game-name";
 
-function loadFeaturedGames() {
-  const container = document.getElementById("featured-games")
-  if (container) {
-    const featuredGames = games.slice(0, 6)
-    container.innerHTML = featuredGames
-      .map((game, index) => {
-        const color = colors[index % colors.length]
-        return `
-          <a href="${game.file}" class="game-card ${color.class}">
-            <div class="game-emoji">${game.emoji}</div>
-            <div class="game-name">${game.name}</div>
-          </a>
-        `
-      })
-      .join("")
-  }
-}
-
-function loadPopularGames() {
-  const container = document.getElementById("popular-games")
-  if (container) {
-    const popularGames = games.slice(6, 12)
-    container.innerHTML = popularGames
-      .map((game, index) => {
-        const color = colors[(index + 6) % colors.length]
-        return `
-          <a href="${game.file}" class="game-card ${color.class}">
-            <div class="game-emoji">${game.emoji}</div>
-            <div class="game-name">${game.name}</div>
-          </a>
-        `
-      })
-      .join("")
-  }
-}
-
-/**
- * Load all games
- */
-function loadAllGames() {
-  const container = document.getElementById("all-games-container")
-  if (container) {
-    container.innerHTML = games
-      .map((game, index) => {
-        const color = colors[index % colors.length]
-        return `
-          <a href="${game.file}" class="all-game-card ${color.class}">
-            <div class="game-emoji-large">${game.emoji}</div>
-            <div class="game-name-large">${game.name}</div>
-          </a>
-        `
-      })
-      .join("")
-  }
+  container.innerHTML = gameSlice
+    .map((game, index) => {
+      const color = colors[index % colors.length];
+      return `
+        <a href="${game.file}" class="${cardClass} ${color.class}">
+          <div class="${emojiClass}">${game.emoji}</div>
+          <div class="${nameClass}">${game.name}</div>
+        </a>
+      `;
+    })
+    .join("");
 }
 
 // ============================================
 // MENU & NAVIGATION
 // ============================================
 
-/**
- * Initialize menu toggle for mobile
- */
 function initMenuToggle() {
-  const menuToggle = document.getElementById("menu-toggle")
-  const sidebar = document.getElementById("sidebar")
+  const menuToggle = document.getElementById("menu-toggle");
+  const sidebar = document.getElementById("sidebar");
 
   if (menuToggle && sidebar) {
-    menuToggle.addEventListener("click", () => {
-      sidebar.classList.add("active")
-    })
+    // Remove existing listeners to prevent double-firing
+    menuToggle.onclick = () => sidebar.classList.toggle("active");
   }
 }
 
-/**
- * Initialize sidebar events
- */
 function initSidebarEvents() {
-  const sidebarClose = document.getElementById("sidebar-close")
-  const sidebar = document.getElementById("sidebar")
-  const sidebarLinks = document.querySelectorAll(".sidebar-link")
+  const sidebarClose = document.getElementById("sidebar-close");
+  const sidebar = document.getElementById("sidebar");
+  const menuToggle = document.getElementById("menu-toggle");
 
   if (sidebarClose && sidebar) {
-    sidebarClose.addEventListener("click", () => {
-      sidebar.classList.remove("active")
-    })
+    sidebarClose.onclick = () => sidebar.classList.remove("active");
   }
-
-  // Close sidebar on link click
-  sidebarLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      sidebar.classList.remove("active")
-    })
-  })
 
   // Close sidebar on outside click
   document.addEventListener("click", (e) => {
-    if (sidebar && !sidebar.contains(e.target) && !document.getElementById("menu-toggle").contains(e.target)) {
-      sidebar.classList.remove("active")
-    }
-  })
-}
-
-/**
- * Add click animations to buttons
- */
-function initButtonAnimations() {
-  const buttons = document.querySelectorAll(".game-button, .cta-button")
-  buttons.forEach((button) => {
-    button.addEventListener("click", (e) => {
-      // Visual feedback
-      button.style.transform = "scale(0.95)"
-      setTimeout(() => {
-        button.style.transform = "scale(1)"
-      }, 100)
-    })
-  })
-}
-
-/**
- * Add hover animations to game cards
- */
-function initCardAnimations() {
-  const cards = document.querySelectorAll(".game-card, .all-game-card, .popular-game-item")
-  cards.forEach((card) => {
-    card.addEventListener("mouseenter", () => {
-      card.style.borderColor = "rgba(0, 0, 0, 0.5)"
-    })
-    card.addEventListener("mouseleave", () => {
-      card.style.borderColor = "#000000"
-    })
-  })
-}
-
-/**
- * Initialize scroll animations
- */
-function initScrollAnimations() {
-  const observerOptions = {
-    threshold: 0.1,
-    rootMargin: "0px 0px -50px 0px",
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.style.animation = "fadeIn 0.6s ease"
-        observer.unobserve(entry.target)
+    if (sidebar && sidebar.classList.contains("active")) {
+      const isClickInside = sidebar.contains(e.target) || (menuToggle && menuToggle.contains(e.target));
+      if (!isClickInside) {
+        sidebar.classList.remove("active");
       }
-    })
-  }, observerOptions)
-
-  // Observe cards
-  document.querySelectorAll(".game-card, .step-card, .stat-block").forEach((el) => {
-    observer.observe(el)
-  })
+    }
+  });
 }
 
-/**
- * Active nav link based on current page
- */
-function setActiveNavLink() {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html"
-  const navLinks = document.querySelectorAll(".nav-link")
-
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href")
-    if (href === currentPage || (currentPage === "" && href === "index.html")) {
-      link.classList.add("active")
-    } else {
-      link.classList.remove("active")
+function initButtonAnimations() {
+  // Use event delegation for better performance and reliability
+  document.addEventListener("click", (e) => {
+    const btn = e.target.closest(".game-button, .cta-button, .upgrade-button");
+    if (btn) {
+      btn.style.transform = "scale(0.95)";
+      setTimeout(() => (btn.style.transform = "scale(1)"), 100);
     }
-  })
+  });
 }
 
 // ============================================
 // INITIALIZATION
 // ============================================
 
-/**
- * Initialize all components on page load
- */
-function init() {
-  // Load components
-  loadHeader()
-  loadFooter()
-  loadSidebar()
-  loadFeaturedGames()
-  loadPopularGames()
-  loadAllGames()
+async function init() {
+  // 1. Load HTML fragments first and WAIT for them
+  const headerLoaded = await loadComponent("header-container", "header.html");
+  await loadComponent("footer-container", "footer.html");
+  const sidebarLoaded = await loadComponent("sidebar-container", "sidebar.html");
 
-  // Initialize interactions
-  setTimeout(() => {
-    initMenuToggle()
-    setActiveNavLink()
-    initButtonAnimations()
-    initCardAnimations()
-    initScrollAnimations()
-  }, 500)
+  // 2. Render internal game lists
+  renderGamesList("featured-games", games.slice(0, 6));
+  renderGamesList("popular-games", games.slice(6, 12));
+  renderGamesList("all-games-container", games, true);
+
+  // 3. Initialize logic ONLY after HTML is in the DOM
+  if (headerLoaded) initMenuToggle();
+  if (sidebarLoaded) initSidebarEvents();
+  
+  initButtonAnimations();
+  setActiveNavLink();
+}
+
+function setActiveNavLink() {
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav-link").forEach((link) => {
+    if (link.getAttribute("href") === currentPage) {
+      link.classList.add("active");
+    }
+  });
 }
 
 // Run on page load
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", init)
+  document.addEventListener("DOMContentLoaded", init);
 } else {
-  init()
+  init();
 }
-
-// ============================================
-// UTILITY FUNCTIONS
-// ============================================
-
-/**
- * Add smooth scroll behavior
- */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    e.preventDefault()
-    const target = document.querySelector(this.getAttribute("href"))
-    if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      })
-    }
-  })
-})
