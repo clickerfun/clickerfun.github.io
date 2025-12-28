@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Clock Clicker - Time for clicks!">
+    <meta property="og:title" content="Clock Clicker - ClickerFun">
+    <meta property="og:description" content="Click clocks with 5 levels and temporal upgrades.">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#F5F1E8">
     <title>Clock Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Replaced SoftwareApplication with WebApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "name": "Clock Clicker",
-        "applicationCategory": "GameApplication",
+        "description": "Click the clock and manage time",
         "url": "https://clickerfun.github.io/clock-clicker.html",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Added VideoGame schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Clock Clicker",
+        "description": "Click clocks to earn points, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker",
+        "gameLocation": "https://clickerfun.github.io/clock-clicker.html",
+        "image": "https://clickerfun.github.io/public/favicon.jpg",
+        "url": "https://clickerfun.github.io/clock-clicker.html"
     }
     </script>
 </head>

@@ -4,19 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Chicken Clicker - Cluck your way to success!">
+    <meta property="og:title" content="Chicken Clicker - ClickerFun">
+    <meta property="og:description" content="Click chickens and build a farm with 5 levels.">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#F5F1E8">
     <title>Chicken Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Replaced SoftwareApplication with WebApplication schema and added VideoGame schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "name": "Chicken Clicker",
-        "applicationCategory": "GameApplication",
+        "description": "Click chickens and build a farm",
         "url": "https://clickerfun.github.io/chicken-clicker.html",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Chicken Clicker",
+        "description": "Click chickens to earn points, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker",
+        "gameLocation": "https://clickerfun.github.io/chicken-clicker.html",
+        "image": "https://clickerfun.github.io/public/favicon.jpg",
+        "url": "https://clickerfun.github.io/chicken-clicker.html"
     }
     </script>
 </head>

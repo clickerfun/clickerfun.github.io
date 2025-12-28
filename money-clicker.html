@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Money Clicker - Click to earn money and build your fortune!">
+    <meta property="og:title" content="Money Clicker - ClickerFun">
+    <meta property="og:description" content="Build your fortune with 5 levels and smart investments.">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#F5F1E8">
     <title>Money Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Replaced SoftwareApplication with WebApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "name": "Money Clicker",
-        "applicationCategory": "GameApplication",
+        "description": "Click to earn money and build your fortune",
         "url": "https://clickerfun.github.io/money-clicker.html",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Added VideoGame schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Money Clicker",
+        "description": "Click to earn money, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker",
+        "gameLocation": "https://clickerfun.github.io/money-clicker.html",
+        "image": "https://clickerfun.github.io/public/favicon.jpg",
+        "url": "https://clickerfun.github.io/money-clicker.html"
     }
     </script>
 </head>

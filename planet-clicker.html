@@ -5,19 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Play Planet Clicker - Click planets and explore the galaxy. Space adventure awaits!">
     <meta name="keywords" content="planet clicker, space clicker game, galaxy game, clicker">
+    <meta property="og:title" content="Planet Clicker - ClickerFun">
+    <meta property="og:description" content="Explore outer space by clicking planets with 5 levels and upgrades.">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#F5F1E8">
     <title>Planet Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Replaced SoftwareApplication with WebApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "name": "Planet Clicker",
-        "applicationCategory": "GameApplication",
+        "description": "Click planets to explore the galaxy",
         "url": "https://clickerfun.github.io/planet-clicker.html",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Added VideoGame schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Planet Clicker",
+        "description": "Click planets to earn points, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker",
+        "gameLocation": "https://clickerfun.github.io/planet-clicker.html",
+        "image": "https://clickerfun.github.io/public/favicon.jpg",
+        "url": "https://clickerfun.github.io/planet-clicker.html"
     }
     </script>
 </head>

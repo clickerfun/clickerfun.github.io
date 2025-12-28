@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Kiwi Clicker - Click tropical kiwis!">
+    <meta property="og:title" content="Kiwi Clicker - ClickerFun">
+    <meta property="og:description" content="Click tropical kiwis with 5 levels and farm upgrades.">
+    <meta property="og:type" content="website">
     <meta name="theme-color" content="#F5F1E8">
     <title>Kiwi Clicker - ClickerFun</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" type="image/png" href="/favicon.jpg">
+    
+    <!-- Replaced SoftwareApplication with WebApplication schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
+        "@type": "WebApplication",
         "name": "Kiwi Clicker",
-        "applicationCategory": "GameApplication",
+        "description": "Click tropical kiwis and build your fruit farm",
         "url": "https://clickerfun.github.io/kiwi-clicker.html",
-        "operatingSystem": "Web",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+        "applicationCategory": "Game",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <!-- Added VideoGame schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Kiwi Clicker",
+        "description": "Click kiwis to earn points, buy upgrades, and progress through 5 levels",
+        "genre": "Clicker",
+        "gameLocation": "https://clickerfun.github.io/kiwi-clicker.html",
+        "image": "https://clickerfun.github.io/public/favicon.jpg",
+        "url": "https://clickerfun.github.io/kiwi-clicker.html"
     }
     </script>
 </head>
