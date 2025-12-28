@@ -63,7 +63,7 @@ body {
    ============================================ */
 
 .header {
-  background-color: var(--bg-secondary);
+  background-color: var(--color-blue);
   border-bottom: var(--border-width) var(--border-style) var(--border-color);
   position: sticky;
   top: 0;
@@ -86,16 +86,18 @@ body {
   font-weight: bold;
   font-size: var(--font-size-lg);
   letter-spacing: 2px;
+  color: var(--bg-primary);
 }
 
 .logo-icon {
   width: 40px;
   height: 40px;
-  border: var(--border-width) var(--border-style) var(--border-color);
+  border: var(--border-width) var(--border-style) var(--bg-primary);
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
+  color: var(--bg-primary);
 }
 
 .nav {
@@ -106,16 +108,19 @@ body {
 
 .nav-link {
   text-decoration: none;
-  color: var(--text-primary);
+  color: var(--bg-primary);
   font-weight: bold;
   border: var(--border-width) var(--border-style) transparent;
   padding: var(--spacing-sm) var(--spacing-md);
   transition: all 0.3s ease;
 }
 
+/* nav-link hover now uses green background */
 .nav-link:hover,
 .nav-link.active {
-  border: var(--border-width) var(--border-style) var(--border-color);
+  border: var(--border-width) var(--border-style) var(--bg-primary);
+  background-color: var(--color-green);
+  color: var(--bg-primary);
 }
 
 .menu-toggle {
@@ -139,7 +144,7 @@ body {
    ============================================ */
 
 .hero {
-  background-color: var(--bg-secondary);
+  background: linear-gradient(135deg, var(--color-yellow) 0%, var(--color-orange) 100%);
   border-bottom: var(--border-width) var(--border-style) var(--border-color);
   padding: var(--spacing-2xl);
   min-height: 60vh;
@@ -162,6 +167,7 @@ body {
   letter-spacing: 4px;
   margin-bottom: var(--spacing-lg);
   animation: slideIn 0.8s ease;
+  color: var(--text-primary);
 }
 
 .hero-subtitle {
@@ -169,12 +175,13 @@ body {
   margin-bottom: var(--spacing-xl);
   letter-spacing: 2px;
   animation: fadeIn 1s ease 0.3s backwards;
+  color: var(--text-primary);
 }
 
 .cta-button {
-  background-color: var(--text-primary);
+  background-color: var(--color-red);
   color: var(--bg-primary);
-  border: var(--border-width) var(--border-style) var(--text-primary);
+  border: var(--border-width) var(--border-style) var(--color-red);
   padding: var(--spacing-md) var(--spacing-xl);
   font-size: var(--font-size-base);
   font-weight: bold;
@@ -184,9 +191,12 @@ body {
   animation: fadeIn 1s ease 0.6s backwards;
 }
 
+/* CTA button hover uses purple with blue text */
 .cta-button:hover {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--color-purple);
+  color: var(--bg-primary);
+  border-color: var(--color-purple);
+  transform: scale(1.05);
 }
 
 .hero-decorative {
@@ -210,6 +220,7 @@ body {
   top: 10%;
   right: 10%;
   animation-delay: 0s;
+  background-color: rgba(0, 82, 204, 0.1);
 }
 
 .shape-2 {
@@ -218,6 +229,7 @@ body {
   bottom: 15%;
   left: 5%;
   animation-delay: 1s;
+  background-color: rgba(0, 166, 80, 0.1);
 }
 
 .shape-3 {
@@ -226,6 +238,7 @@ body {
   top: 50%;
   right: 25%;
   animation-delay: 2s;
+  background-color: rgba(255, 184, 28, 0.1);
 }
 
 /* ============================================
@@ -236,6 +249,8 @@ body {
   padding: var(--spacing-2xl);
   max-width: 1400px;
   margin: 0 auto;
+  background-color: var(--color-green);
+  border: var(--border-width) var(--border-style) var(--border-color);
 }
 
 .section-title {
@@ -246,6 +261,7 @@ body {
   text-transform: uppercase;
   border-bottom: var(--border-width) var(--border-style) var(--border-color);
   padding-bottom: var(--spacing-lg);
+  color: var(--bg-primary);
 }
 
 .games-grid {
@@ -265,9 +281,70 @@ body {
   gap: var(--spacing-md);
 }
 
+/* Game cards have colored backgrounds on hover matching their accent color */
 .game-card:hover {
   transform: translateY(-8px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-card-blue:hover {
+  background-color: var(--color-blue);
+  color: var(--bg-primary);
+}
+
+.game-card-blue:hover .game-card-header,
+.game-card-blue:hover .game-description {
+  color: var(--bg-primary);
+}
+
+.game-card-green:hover {
+  background-color: var(--color-green);
+  color: var(--bg-primary);
+}
+
+.game-card-green:hover .game-card-header,
+.game-card-green:hover .game-description {
+  color: var(--bg-primary);
+}
+
+.game-card-yellow:hover {
+  background-color: var(--color-yellow);
+  color: var(--text-primary);
+}
+
+.game-card-yellow:hover .game-card-header,
+.game-card-yellow:hover .game-description {
+  color: var(--text-primary);
+}
+
+.game-card-red:hover {
+  background-color: var(--color-red);
+  color: var(--bg-primary);
+}
+
+.game-card-red:hover .game-card-header,
+.game-card-red:hover .game-description {
+  color: var(--bg-primary);
+}
+
+.game-card-purple:hover {
+  background-color: var(--color-purple);
+  color: var(--bg-primary);
+}
+
+.game-card-purple:hover .game-card-header,
+.game-card-purple:hover .game-description {
+  color: var(--bg-primary);
+}
+
+.game-card-orange:hover {
+  background-color: var(--color-orange);
+  color: var(--bg-primary);
+}
+
+.game-card-orange:hover .game-card-header,
+.game-card-orange:hover .game-description {
+  color: var(--bg-primary);
 }
 
 .game-card-blue {
@@ -319,9 +396,11 @@ body {
   align-self: flex-start;
 }
 
+/* Game button hover uses bright orange */
 .game-button:hover {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+  background-color: var(--color-orange);
+  color: var(--bg-primary);
+  border-color: var(--color-orange);
 }
 
 /* ============================================
@@ -329,7 +408,7 @@ body {
    ============================================ */
 
 .stats {
-  background-color: var(--text-primary);
+  background-color: var(--color-purple);
   color: var(--bg-primary);
   padding: var(--spacing-2xl);
   display: grid;
@@ -343,6 +422,13 @@ body {
   border: var(--border-width) var(--border-style) var(--bg-primary);
   padding: var(--spacing-xl);
   text-align: center;
+  transition: all 0.3s ease;
+}
+
+/* Stat blocks have hover effect with blue background */
+.stat-block:hover {
+  background-color: var(--color-blue);
+  transform: scale(1.05);
 }
 
 .stat-number {
@@ -365,6 +451,12 @@ body {
   padding: var(--spacing-2xl);
   max-width: 1400px;
   margin: 0 auto;
+  background-color: var(--color-red);
+  border: var(--border-width) var(--border-style) var(--border-color);
+}
+
+.how-it-works .section-title {
+  color: var(--bg-primary);
 }
 
 .steps-grid {
@@ -381,8 +473,14 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Step cards turn yellow on hover */
 .step-card:hover {
-  background-color: var(--bg-primary);
+  background-color: var(--color-yellow);
+  color: var(--text-primary);
+}
+
+.step-card:hover h3 {
+  color: var(--text-primary);
 }
 
 .step-number {
@@ -412,6 +510,11 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   border-top: var(--border-width) var(--border-style) var(--border-color);
+  background-color: var(--color-orange);
+}
+
+.popular-games .section-title {
+  color: var(--bg-primary);
 }
 
 .popular-games-list {
@@ -429,8 +532,15 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Popular game items turn green on hover */
 .popular-game-item:hover {
-  background-color: var(--bg-primary);
+  background-color: var(--color-green);
+  color: var(--bg-primary);
+  transform: translateY(-4px);
+}
+
+.popular-game-item:hover .popular-game-name {
+  color: var(--bg-primary);
 }
 
 .popular-game-name {
@@ -449,6 +559,8 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding: var(--spacing-2xl);
+  background-color: var(--color-blue);
+  border: var(--border-width) var(--border-style) var(--border-color);
 }
 
 .all-games-title {
@@ -458,11 +570,12 @@ body {
   margin-bottom: var(--spacing-md);
   border-bottom: var(--border-width) var(--border-style) var(--border-color);
   padding-bottom: var(--spacing-lg);
+  color: var(--bg-primary);
 }
 
 .all-games-subtitle {
   font-size: var(--font-size-lg);
-  color: var(--text-secondary);
+  color: var(--bg-primary);
   margin-bottom: var(--spacing-xl);
 }
 
@@ -484,9 +597,16 @@ body {
   gap: var(--spacing-sm);
 }
 
+/* All game cards turn purple on hover */
 .all-game-card:hover {
   transform: scale(1.05);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  background-color: var(--color-purple);
+  color: var(--bg-primary);
+}
+
+.all-game-card:hover .game-name-large {
+  color: var(--bg-primary);
 }
 
 .game-name-large {
